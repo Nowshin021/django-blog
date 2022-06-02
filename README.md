@@ -1,5 +1,14 @@
 
- # Django-Blogside
+ # Django-Blogsite
+ 
+ <br>
+ A simple blog site web app using Django CSS html
+ Features :
+ Sign up/Log in
+ Posting/Deleting blog
+ Updating Profile
+ Browsing the Blogs
+ 
 1. Home Page
 ![image](https://user-images.githubusercontent.com/54597147/171726939-60c0cd00-6635-4488-994c-bbbacaa8716c.png)
 <br><br>
