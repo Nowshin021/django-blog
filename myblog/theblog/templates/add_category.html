@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #9fcc7f;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #2e2c2c;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+    <div class="s-content">
+        <div class="row">
+            <div id="main" class="s-content__main large-8 column">
+            <h3 class="h6">Add a catagory</h3>
+            <form method="POST">
+              {% csrf_token %}
+                {{ form.as_p }}
+                <input type="Submit" value="Add category"> 
+                
+                
+            </form>
+            </div>
+        </div>    
+    </div>
+{% else %}
+  <p>'You are not allowed in this page as you are not a authenticated user . please regester/login to view this page </p>
+{% endif %}
+</body>
+</html>
+{% endblock %}

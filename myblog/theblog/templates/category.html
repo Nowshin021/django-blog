@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{post.category}} {% endblock %} 
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<body id="top">
+
+    <div class="s-content">
+        {% block content %}
+        <div class="row">
+            <div id="main" class="s-content__main large-8 column">
+                {% for post in category_posts %}
+                <article class="entry">
+
+                    <header class="entry__header">
+
+                        <h2 class="entry__title h1">
+                            
+                            <a href="{% url 'article-detail' post.pk %}" title="">{{post.title}}</a>
+                            
+                        </h2>
+
+                        <div class="entry__meta">
+                            <ul>
+                                <li>{{post.author.first_name}}</li>
+                                <li>{{post.post_date}}</li>
+                                <li><a href="{% url 'category' post.category %}" title="" rel="category tag">{{post.category}} </a></li>
+                                {% if user.is_authenticated %}
+                                    {% if user.id == post.author.id %}
+                                    <li><a href="{% url 'update-post'  post.pk %}">Edit Post </a></li>
+                                    <li><a href="{% url 'delete-post'  post.pk %}">Delete Post </a></li>
+                                    {% endif %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                     
+                    </header>
+                    
+                    <div class="entry__content">
+                        <p>
+                            {{ post.body|slice:":100" }}
+                        </p>
+                    </div> 
+
+                </article> <!-- end entry -->
+                {% endfor %}
+
+            </div> <!-- end main -->
+         
+
+
+            <div id="sidebar" class="s-content__sidebar large-4 column">
+
+                <div class="widget widget--search">
+                   <h3 class="h6">Search</h3> 
+                   <form action="#">
+                      <input type="text" value="Search here..." onblur="if(this.value == '') { this.value = 'Search here...'; }" onfocus="if (this.value == 'Search here...') { this.value = ''; }" class="text-search">
+                      <input type="submit" value="" class="submit-search">
+                   </form>
+                </div>
+ 
+                <div class="widget widget--categories">
+                    <h3 class="h6">Categories.</h3> 
+                    <ul>
+                     {% for post in Category %}
+                         <li><a href="{% url 'category' post.name %}" title="Catagories">{{ post.name }}</a></li>
+                         
+                     {% endfor %}
+                     
+                     
+                     </ul>
+                </div>
+ 
+                <div class="widget widget_popular">
+                     <h3 class="h6">Popular Post.</h3>
+                     <ul class="link-list">
+                         <li><a href="#">Sint cillum consectetur voluptate.</a></li>
+                         <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
+                         <li><a href="#">Fugiat minim eiusmod do.</a></li>
+                     </ul>
+                 </div>
+                
+            </div> <!-- end sidebar -->
+
+        </div> <!-- end row -->
+        {% endblock %}
+    </div> 
+    <!-- end content-wrap -->
+
+
+    <!-- Footer
+    ================================================== -->
+    
+
+
+    <!-- Java Script
+    ================================================== -->
+   
+
+</body>
+
+</html>

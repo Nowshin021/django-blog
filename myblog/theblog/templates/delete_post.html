@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}  Delete :  {{post.title}} {% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+<body id="top">
+    <!-- Header
+    ================================================== -->
+    
+
+    <!-- Content
+    ================================================== -->
+    
+    <div class="s-content">
+        {% block content %}
+        <div class="row">
+
+            <div id="main" class="s-content__main large-8 column">
+                <form method="POST">
+                    {% csrf_token %}
+                    <strong>Are you sure you want to delete your post " {{post.title}} " </strong> <br><br><br>
+                    <button  class="btn btn-danger">Delete</button>
+                    <a class="btn btn-primary" href="{% url 'home' %}" role="button">Cancel</a>
+
+                </form>
+                
+            </div> <!-- end main -->
+
+
+           <div id="sidebar" class="s-content__sidebar large-4 column">
+
+            <!---- <div class="widget widget--search">
+                  <h3 class="h6">Search</h3> 
+                  <form action="#">
+                     <input type="text" value="Search here..." onblur="if(this.value == '') { this.value = 'Search here...'; }" onfocus="if (this.value == 'Search here...') { this.value = ''; }" class="text-search">
+                     <input type="submit" value="" class="submit-search">
+                  </form>
+               </div>
+            -->
+
+               <div class="widget widget--categories">
+                   <h3 class="h6">Categories.</h3> 
+                   <ul>
+                        <li><a href="#" title="">Wordpress</a> (2)</li>
+                        <li><a href="#" title="">Ghost</a> (14)</li>
+                        <li><a href="#" title="">Joomla</a> (5)</li>
+                        <li><a href="#" title="">Drupal</a> (3)</li>
+                        <li><a href="#" title="">Magento</a> (2)</li>
+                        <li><a href="#" title="">Uncategorized</a> (9)</li>
+                    </ul>
+                </div>
+
+                <div class="widget widget_text group">
+                    <h3 class="h6">Widget Text.</h3>
+
+                    <p>
+                    Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor 
+                    aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur 
+                    sint cillum sint consectetur voluptate adipisicing Duis irure magna ut sit amet reprehenderit.
+                    </p>
+                </div>
+
+               
+
+                <div class="widget widget_popular">
+                    <h3 class="h6">Popular Post.</h3>
+
+                    <ul class="link-list">
+                        <li><a href="#">Sint cillum consectetur voluptate.</a></li>
+                        <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
+                        <li><a href="#">Fugiat minim eiusmod do.</a></li>
+                    </ul>
+                </div>
+               
+        </div> <!-- end sidebar -->
+
+    </div> <!-- end row -->
+    {% endblock %}
+</div> <!-- end content-wrap -->
+
+
+   
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}  {{post.title}} {% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+<body id="top">
+    <!-- Header
+    ================================================== -->
+    
+
+    <!-- Content
+    ================================================== -->
+    
+    <div class="s-content">
+        {% block content %}
+        <div class="row">
+
+            <div id="main" class="s-content__main large-8 column">
+               
+                <article class="entry">
+
+                    <header class="entry__header">
+
+                        <h2 class="entry__title h1">
+                            
+                            <a href="{% url 'article-detail' post.pk %}" title="">{{post.title}}</a>
+                            
+                        </h2>
+
+                        <div class="entry__meta">
+                            <ul>
+                                <li>{{post.author.first_name}} </li>
+                                <li>{{post.post_date}}</li>
+                                
+                                <li><a href="{% url 'category' post.category %}" title="" rel="category tag">{{post.category}} </a></li>
+                               
+                                {% if user.is_authenticated %}
+                                    {% if user.id == post.author.id %}
+                                        <li><a href="{% url 'update-post'  post.pk %}">Edit Post </a></li>
+                                        <li><a href="{% url 'delete-post'  post.pk %}">Delete Post </a></li>
+                                    {% endif %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                     
+                    </header>
+                    
+                    <div class="entry__content">
+                       
+                        <p>
+                            {{post.body|safe}}
+                        </p>
+                    </div> 
+
+                </article> <!-- end entry -->
+            </div> <!-- end main -->
+
+
+            <div id="sidebar" class="s-content__sidebar large-4 column">
+
+           
+                <div class="widget widget--categories">
+                    <h3 class="h6">About Author</h3> 
+                    <ul>{% if post.author.profilemodel.id %}
+                            <a href="{% url 'PublicProfile'  post.author.profilemodel.id %}" ><li><strong>{{post.author.first_name}}</strong></li></a>
+                        {% else %}
+                            <li><strong>{{post.author.first_name}}</strong></li></a>
+                        {% endif %}
+                      
+                        <p class = 'small text-muted'>
+                            {% if post.author.profilemodel.profile_pic %}
+                                <img src = "{{post.author.profilemodel.profile_pic.url}}">
+                            {% else %}
+                                <img src = "{% static 'images/pro-pic.png' %}">
+                            {% endif %}
+                            <li>{{post.author.first_name}}</li>
+                            <li>{{post.author.last_name}}</li>
+                
+                            {% if post.author.profilemodel.twitter %}
+                                <a href="{{post.author.profilemodel.twitter}}">Twitter</a>|
+                            {% endif %}
+                            {% if post.author.profilemodel.facebook %}
+                                <a href="{{post.author.profilemodel.facebook}}">|facebook</a>
+                            {% endif %}
+                            {% if post.author.profilemodel.instagram %}
+                                <a href="{{post.author.profilemodel.instagram}}">|instagram</a>
+                            {% endif %}
+                            {% if post.author.profilemodel.linkedin %}
+                                <a href="{{post.author.profilemodel.linkedin}}">|linkedin</a>
+                            {% endif %}
+                        </p>
+                    </ul>
+                </div>
+               
+            </div>  
+
+        </div> <!-- end row -->
+    {% endblock %}
+</div> <!-- end content-wrap -->
+
+
+   
+
+</body>
+
+</html>
